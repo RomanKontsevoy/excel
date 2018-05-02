@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 const countOfSquares = 5;
+const countOfRows = 1;
 
 class Square extends Component {
 	//handleChange(e) {
@@ -9,7 +10,7 @@ class Square extends Component {
    //}
 	render() {
 		return (
-		  <input className="Square" value={this.props.value} onChange={() => this.props.onChange()} />
+		  <input className="Square" value={this.props.value} onChange={(e) => this.props.onChange(e)} />
 		);
     };
 };
@@ -20,15 +21,15 @@ class Row extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-			squares: Array(countOfSquares).fill('')
+			squares: Array(countOfSquares).fill("")
 		};
-	this.handleChange = this.handleChange.bind(this);	
+	this.handleChange = this.handleChange.bind(this);
+		
 	}
 	handleChange(i, e) {
 		const squares = this.state.squares.slice();
 		squares[i] = e.target.value;
 		this.setState({squares: squares});
-		console.log(this.state.squares);
 	}
 	
 	renderSquare(s) {
@@ -38,13 +39,14 @@ class Row extends Component {
                 value={this.state.squares[i]}
                 onChange={(e) => this.handleChange(i, e)}
             />;
-			arrOfSquares.splice(arrOfSquares.length === 0 ? 0 : arrOfSquares.length-1, 0, square);
+			arrOfSquares.splice(arrOfSquares.length-1, 0, square);
 		}
         return (
 			arrOfSquares
         );
     }
 	render() {
+		console.log(this.state.squares);
 		return (
 			  <div	className="Row">
 				{this.renderSquare(countOfSquares)}
@@ -57,7 +59,7 @@ class Table extends Component {
 	renderRow(r) {
 		const arrOfRows = [];
 		for(let i = 0; i < r; i++) {
-			let row = <Row
+			let row = <Row key={"row " + i}
                 value={i}
                 onClick={() => this.props.onClick(i)}
             />;
@@ -68,12 +70,12 @@ class Table extends Component {
         );
     }
 	render() {
-    return (
-      <div	className="Table">
-		{this.renderRow(1)}
-	  </div>
-    );
-  }
+		return (
+			  <div className="Table">
+				{this.renderRow(countOfRows)}
+			  </div>
+		);
+    }
   }
 
 class App extends Component {

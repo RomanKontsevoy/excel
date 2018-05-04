@@ -18,6 +18,10 @@
 
 .App-intro {
   font-size: large;
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
 .Table {
@@ -56,4 +60,13 @@
 .Square:focus {
 	z-index: 2;
     border: 1px solid #59da39
+}
+
+.ControlLine {
+    width: 100%;
+    height: 20px;
+    display: block;
+    padding: 2px 5px;
+    border: 2px solid saddlebrown;
+    box-shadow: 0 0 3px black;
 }
